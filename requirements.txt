@@ -1,3 +1,19 @@
-Flask==1.1.2
-paramiko==2.7.1
+# Pinned with compatible-release specifiers so that patch and minor security
+# fixes are picked up on rebuild. Run `pip-audit` in CI and keep Dependabot (or
+# equivalent) enabled on your fork: the versions this project started on
+# (Flask 1.1.2, paramiko 2.7.1) accumulated published CVEs for years.
 
+Flask~=3.1
+Flask-WTF~=1.2            # CSRF protection
+Flask-Limiter~=3.8        # brute-force / password-spray throttling
+python-dotenv~=1.0
+gunicorn~=23.0
+
+# --- AD_BACKEND=ldap (default) ---
+ldap3~=2.9
+
+# --- AD_BACKEND=winrm ---
+# For Kerberos instead of NTLM install pywinrm[kerberos], which needs
+# libkrb5-dev and gcc at build time.
+pywinrm~=0.5
+requests-ntlm~=1.3

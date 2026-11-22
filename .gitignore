@@ -1,0 +1,32 @@
+# Secrets — never commit a populated .env
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.crt
+!tests/fixtures/*.crt
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Runtime
+*.log
+instance/
