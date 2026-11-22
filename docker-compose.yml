@@ -1,0 +1,37 @@
+# Reference deployment. Terminate TLS in front of this service — see
+# docs/deployment.md. Never expose port 8000 to users directly.
+
+services:
+  sspr:
+    build: .
+    image: adds-sspr:local
+    restart: unless-stopped
+    # Bound to loopback on purpose: the reverse proxy is the only client.
+    ports:
+      - "127.0.0.1:8000:8000"
+    env_file:
+      - .env
+    environment:
+      BEHIND_PROXY: "true"
+      FORCE_HTTPS: "true"
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+    volumes:
+      # Mount your AD / WinRM CA certificate read-only and point
+      # LDAP_CA_CERT_FILE or WINRM_CA_CERT_FILE at it.
+      - ./certs:/certs:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=3).status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"

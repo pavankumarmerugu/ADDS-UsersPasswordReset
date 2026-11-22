@@ -1,0 +1,122 @@
+/* Served locally rather than from a public CDN: a compromised CDN on a page
+   that handles passwords is a credential-theft vector, and the Content
+   Security Policy in app/security.py forbids third-party origins. */
+
+:root {
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --text: #1b2430;
+  --muted-text: #5a6b7d;
+  --border: #d4dae2;
+  --accent: #0b5fb0;
+  --error-bg: #fdecea;
+  --error-text: #8b1a12;
+  --success-bg: #e8f5ec;
+  --success-text: #14612f;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 2rem 1rem;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.card {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+h1 { margin: 0 0 .25rem; font-size: 1.5rem; }
+h2 { margin: 0 0 .5rem; font-size: 1rem; }
+.lede { margin: 0 0 1.5rem; color: var(--muted-text); }
+
+label {
+  display: block;
+  margin: 1rem 0 .35rem;
+  font-weight: 600;
+  font-size: .9rem;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: .65rem .75rem;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+}
+
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+button {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: .75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover { background: #094a8a; }
+
+.alert {
+  margin: .5rem 0;
+  padding: .7rem .9rem;
+  border-radius: 6px;
+  font-size: .92rem;
+}
+
+.alert--error { background: var(--error-bg); color: var(--error-text); }
+.alert--success { background: var(--success-bg); color: var(--success-text); }
+
+.rules {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  font-size: .9rem;
+  color: var(--muted-text);
+}
+
+.rules ul { margin: 0; padding-left: 1.2rem; }
+
+.footer {
+  max-width: 34rem;
+  margin: 1rem auto 0;
+  text-align: center;
+  font-size: .85rem;
+  color: var(--muted-text);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #11161d;
+    --card: #19202a;
+    --text: #e8edf3;
+    --muted-text: #9fb0c0;
+    --border: #2c3744;
+    --accent: #3d8ddb;
+    --error-bg: #3a1c19;
+    --error-text: #ffb4ab;
+    --success-bg: #14301f;
+    --success-text: #8fe0ab;
+  }
+  input[type="text"], input[type="password"] { background: #10151c; }
+}
